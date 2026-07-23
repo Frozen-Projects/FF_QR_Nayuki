@@ -7,7 +7,7 @@ UFF_QR_Nayuki_BPLib::UFF_QR_Nayuki_BPLib(const FObjectInitializer& ObjectInitial
 
 }
 
-void UFF_QR_Nayuki_BPLib::NayukiQr_GenerateQRCode(FDelegateQrEncode DelegateTexture2D, const FString In_Text, FVector2D Resolution, int32 Border, ENayukiQrTolerance ErrorTolerance, FColor BlackColor, FColor WhiteColor)
+void UFF_QR_Nayuki_BPLib::NayukiQr_GenerateQRCode(FDelegateQrEncode DelegateTexture2D, const FString In_Text, FVector2D Resolution, int32 Border, ENayukiQrTolerance ErrorTolerance, FColor Color_BG, FColor Color_Pattern)
 {
     const int32 TextureWidth = FMath::RoundToInt(Resolution.X);
     const int32 TextureHeight = FMath::RoundToInt(Resolution.Y);
@@ -31,10 +31,10 @@ void UFF_QR_Nayuki_BPLib::NayukiQr_GenerateQRCode(FDelegateQrEncode DelegateText
         return;
     }
 
-    BlackColor.A = 255;
-    WhiteColor.A = 255;
+    Color_BG.A = 255;
+    Color_Pattern.A = 255;
 
-    AsyncTask(ENamedThreads::AnyNormalThreadNormalTask, [DelegateTexture2D, In_Text, TextureWidth, TextureHeight, PixelBorder, ErrorTolerance, BlackColor, WhiteColor]()
+    AsyncTask(ENamedThreads::AnyNormalThreadNormalTask, [DelegateTexture2D, In_Text, TextureWidth, TextureHeight, PixelBorder, ErrorTolerance, Color_BG, Color_Pattern]()
         {
             qrcodegen::QrCode::Ecc ToleranceLevel = qrcodegen::QrCode::Ecc::LOW;
 
@@ -94,7 +94,7 @@ void UFF_QR_Nayuki_BPLib::NayukiQr_GenerateQRCode(FDelegateQrEncode DelegateText
             }
 
             TArray<FColor> FinalPixels;
-            FinalPixels.Init(WhiteColor, static_cast<int32>(PixelCount64));
+            FinalPixels.Init(Color_BG, static_cast<int32>(PixelCount64));
 
             for (int32 ModuleY = 0; ModuleY < QRSize; ++ModuleY)
             {
@@ -118,7 +118,7 @@ void UFF_QR_Nayuki_BPLib::NayukiQr_GenerateQRCode(FDelegateQrEncode DelegateText
 
                         for (int32 PixelX = 0; PixelX < ModulePixelWidth; ++PixelX)
                         {
-                            Row[PixelX] = BlackColor;
+                            Row[PixelX] = Color_Pattern;
                         }
                     }
                 }
