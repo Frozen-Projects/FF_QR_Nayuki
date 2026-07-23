@@ -40,24 +40,25 @@ void UFF_QR_Nayuki_BPLib::NayukiQr_GenerateQRCode(FDelegateQrEncode DelegateText
 
             switch (ErrorTolerance)
             {
-            case ENayukiQrTolerance::Quartile:
-                ToleranceLevel = qrcodegen::QrCode::Ecc::QUARTILE;
-                break;
+                case ENayukiQrTolerance::Quartile:
+                    ToleranceLevel = qrcodegen::QrCode::Ecc::QUARTILE;
+                    break;
 
-            case ENayukiQrTolerance::Low:
-                ToleranceLevel = qrcodegen::QrCode::Ecc::LOW;
-                break;
+                case ENayukiQrTolerance::Low:
+                    ToleranceLevel = qrcodegen::QrCode::Ecc::LOW;
+                    break;
 
-            case ENayukiQrTolerance::Mid:
-                ToleranceLevel = qrcodegen::QrCode::Ecc::MEDIUM;
-                break;
+                case ENayukiQrTolerance::Mid:
+                    ToleranceLevel = qrcodegen::QrCode::Ecc::MEDIUM;
+                    break;
 
-            case ENayukiQrTolerance::High:
-                ToleranceLevel = qrcodegen::QrCode::Ecc::HIGH;
-                break;
+                case ENayukiQrTolerance::High:
+                    ToleranceLevel = qrcodegen::QrCode::Ecc::HIGH;
+                    break;
 
-            default:
-                break;
+                default:
+                    ToleranceLevel = qrcodegen::QrCode::Ecc::HIGH;
+                    break;
             }
 
             const FTCHARToUTF8 UTF8Text(*In_Text);

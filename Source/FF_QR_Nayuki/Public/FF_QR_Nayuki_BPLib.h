@@ -7,7 +7,7 @@
 #include "FF_QR_Nayuki_BPLib.generated.h"
 
 UDELEGATE(BlueprintAuthorityOnly)
-DECLARE_DYNAMIC_DELEGATE_ThreeParams(FDelegateQrEncode, bool, bIsSuccessfull, FString, ErrorCode, UTexture2D*, Out);
+DECLARE_DYNAMIC_DELEGATE_ThreeParams(FDelegateQrEncode, bool, bIsSuccessfull, FString, Out_Code, UTexture2D*, Out_QR);
 
 UCLASS()
 class FF_QR_NAYUKI_API UFF_QR_Nayuki_BPLib : public UBlueprintFunctionLibrary
